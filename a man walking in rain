@@ -1,55 +1,50 @@
-#include<stdio.h>
-#include<graphics.h>
+#include <graphics.h>
+#include <stdlib.h>
+#include <time.h>
 
-#define ScreenWidth getmaxx()
-#define ScreenHeight getmaxy()
-#define GroundY ScreenHeight*0.74
-
-int ldisp = 0;
-
-void DrawManAndUmbrella(int x, int ldisp) {
-    // Head
-    circle(x, GroundY - 90, 10);
-    line(x, GroundY - 80, x, GroundY - 30);
-    // Hand
-    line(x, GroundY - 70, x + 10, GroundY - 60);
-    line(x, GroundY - 65, x + 10, GroundY - 55);
-    line(x + 10, GroundY - 60, x + 20, GroundY - 70);
-    line(x + 10, GroundY - 55, x + 20, GroundY - 70);
-    // Legs
-    line(x, GroundY - 30, x + ldisp, GroundY);
-    line(x, GroundY - 30, x - ldisp, GroundY);
-    // Umbrella
-    pieslice(x + 20, GroundY - 120, 0, 180, 40);
-    line(x + 20, GroundY - 120, x + 20, GroundY - 70);
-}
-
-void Rain(int x) {
-    int i, rx, ry;
-    for (i = 0; i < 400; i++) {
-        rx = rand() % ScreenWidth;
-        ry = rand() % ScreenHeight;
-        if (ry < GroundY - 4) {
-            if (ry < GroundY - 120 || (ry > GroundY - 120 && (rx < x - 20 || rx > x + 60)))
-                line(rx, ry, rx + 0.5, ry + 4);
+int main() {
+    int gd = DETECT, gm;
+    initgraph(&gd, &gm, NULL);
+    
+    int manX = 100;
+    int numIterations = 200;
+    
+    for (int i =0; i < numIterations; i++) {
+        cleardevice();
+        
+        setcolor(WHITE);
+        line(0, 380, getmaxx(), 380);
+        
+        
+        setcolor(WHITE);
+        circle(manX, 200, 30);    //head
+        line(manX, 230, manX, 300);  //body
+        line(manX, 300, manX - 40,380); //left leg
+        line(manX, 300, manX + 40,380); //right leg
+        line(manX, 250, manX - 40,280); //left hand
+        line(manX, 250, manX + 40,280); //right hand
+        
+        setcolor(GREEN);
+        line(manX - 40, 100, manX - 40,280);
+        setcolor(RED);
+        arc(manX - 40, 120, 180, 0 , 50);
+        line(manX - 90,120, manX+10, 120);
+        
+        setcolor(BLUE);
+        for (int j = 0; j <200; j++) {
+            int x = rand() % getmaxx();
+            int y = rand() % getmaxy();
+            line(x, y, x, y + 5);
+        }
+        
+        delay(100);
+        manX += 5;
+        
+        if (manX > getmaxx() + 40) {
+            
+            manx = -40;
         }
     }
-}
-
-void main() {
-    int gd = DETECT, gm, x = 0;
-    initgraph(&gd, &gm, "C:\\TurboC3\\BGI");
-
-    while (!kbhit()) {
-        line(1, GroundY, ScreenWidth, GroundY);
-        Rain(x);
-        ldisp = (ldisp + 4) % 20;
-        DrawManAndUmbrella(x, ldisp);
-        delay(75);
-        cleardevice();
-        x = (x + 4) % ScreenWidth;
-    }
-
-    closegraph();
+    
     getch();
-}
+    closegraph();

@@ -1,3 +1,7 @@
+Exp 1 : Write C++ program to draw a concave polygon and fill it with desired
+color using scan fill algorithm. Apply the concept of inheritance
+
+
 /* Write C++ program to fill polygon using scan line algorithm*/
 
 #include<graphics.h>

@@ -1,3 +1,8 @@
+Exp 4 : Write C++ program to draw 2-D object and perform following basic
+transformations, Scaling, Translation, and Rotation. Apply the concept
+of operator overloading.
+
+
 /*Write C++ program to draw 2-D object and perform following basic transformations -
 a) Scaling
 b) Translation

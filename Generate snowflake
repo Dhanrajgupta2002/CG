@@ -1,3 +1,6 @@
+Exp 5 : Write C++ program to generate snowflake using concept of fractals.
+
+
 #include <iostream>
 #include <math.h>
 #include <graphics.h>
